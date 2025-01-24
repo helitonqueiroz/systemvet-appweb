@@ -54,6 +54,9 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
+# Garante que arquivos estáticos serão servidos em produção
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 ROOT_URLCONF = "sistema_veterinario.urls"
 
 TEMPLATES = [
