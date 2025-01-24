@@ -1,0 +1,10 @@
+site
+user: if0_38169174 
+password: 44O76q1B2nTLvcQ
+
+DB
+databasename:  if0_38169174_systemvet_db 
+MySQL Username: if0_38169174
+MySQL Password:  44O76q1B2nTLvcQ
+MySQL Hostname: sql210.infinityfree.com
+MySQL Port: 3306

@@ -1,0 +1,18 @@
+{% load static %}
+<header>
+    <div class="logo">
+        <a href="{% url 'home' %}">
+            <img class="logo-img" src="{% static 'media/logo.jpg' %}" style="float:left; margin-right: 10px;">
+            SystemVet - Gestão de Tutores e Pets
+        </a>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'lista_tutores' %}">Tutores</a></li>
+            <li><a href="{% url 'lista_pacientes' %}">Pacientes</a></li>
+            <li><a href="{% url 'historico' %}">Histórico</a></li>
+            <li><a href="{% url 'configuracoes' %}">Configurações</a></li>
+        </ul>
+    </nav>
+</header>

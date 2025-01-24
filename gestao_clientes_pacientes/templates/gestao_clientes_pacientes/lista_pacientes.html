@@ -1,0 +1,16 @@
+{% extends "gestao_clientes_pacientes/base.html" %}
+
+{% block title %}Lista de Pacientes{% endblock %}
+
+{% block content %}
+<h2>Pacientes Registrados</h2>
+<ul>
+    {% for paciente in pacientes %}
+    <li>
+        <a href="{% url 'detalhes_paciente' paciente.id %}">{{ paciente.nome }}</a>
+    </li>
+    {% empty %}
+    <p>Nenhum paciente registrado.</p>
+    {% endfor %}
+</ul>
+{% endblock %}

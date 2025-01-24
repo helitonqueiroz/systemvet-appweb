@@ -1,0 +1,14 @@
+<footer style="display: flex; justify-content: space-between; padding-left: 20px; padding-right: 20px;">
+    <p>&copy; <span id="year"></span> SystemVet. Todos os direitos reservados.</p>
+    <p style="margin-left: auto;"><span id="datetime"></span></p>
+</footer>
+<script>
+    function updateDateTime() {
+        var now = new Date();
+        var datetime = now.toLocaleString();
+        document.getElementById('datetime').textContent = datetime;
+        document.getElementById('year').textContent = now.getFullYear();
+    }
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+</script>

@@ -1,0 +1,16 @@
+{% extends "gestao_clientes_pacientes/base.html" %}
+
+{% block title %}Lista de Tutores{% endblock %}
+
+{% block content %}
+<h2>Tutores Registrados</h2>
+<ul>
+    {% for tutor in tutores %}
+    <li>
+        <a href="{% url 'detalhes_tutor' tutor.id %}">{{ tutor.nome }}</a>
+    </li>
+    {% empty %}
+    <p>Nenhum tutor registrado.</p>
+    {% endfor %}
+</ul>
+{% endblock %}

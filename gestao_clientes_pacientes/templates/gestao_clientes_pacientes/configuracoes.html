@@ -1,0 +1,29 @@
+{% extends "gestao_clientes_pacientes/base.html" %}
+
+{% block title %}Configurações do Sistema{% endblock %}
+
+{% block content %}
+<h2>Configurações do Sistema</h2>
+<p>Gerencie permissões, preferências e informações da conta.</p>
+
+<form method="post">
+    {% csrf_token %}
+    <div>
+        <label for="username">Nome de Usuário:</label>
+        <input type="text" id="username" name="username" value="{{ user.username }}">
+    </div>
+    <div>
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" value="{{ user.email }}">
+    </div>
+    <div>
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password">
+    </div>
+    <div>
+        <label for="confirm_password">Confirmar Senha:</label>
+        <input type="password" id="confirm_password" name="confirm_password">
+    </div>
+    <button type="submit">Salvar Configurações</button>
+</form>
+{% endblock %}

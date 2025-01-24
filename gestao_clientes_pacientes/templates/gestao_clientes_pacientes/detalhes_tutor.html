@@ -1,0 +1,20 @@
+{% extends "gestao_clientes_pacientes/base.html" %}
+
+{% block title %}Detalhes do Tutor{% endblock %}
+
+{% block content %}
+<h2>{{ tutor.nome }}</h2>
+<p><strong>Endereço:</strong> {{ tutor.endereco }}</p>
+<p><strong>Telefone:</strong> {{ tutor.telefone }}</p>
+<p><strong>Email:</strong> {{ tutor.email }}</p>
+<p><strong>CPF:</strong> {{ tutor.cpf }}</p>
+
+<h3>Pacientes</h3>
+<ul>
+    {% for paciente in tutor.pacientes.all %}
+    <li>{{ paciente.nome }}</li>
+    {% empty %}
+    <p>Sem pacientes associados.</p>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "gestao_clientes_pacientes/base.html" %}
+
+{% block title %}Histórico Médico{% endblock %}
+
+{% block content %}
+<h2>Histórico Médico dos Pacientes</h2>
+<ul>
+    {% for paciente in pacientes %}
+    <li>
+        <h3>{{ paciente.nome }}</h3>
+        <ul>
+            {% for historico in paciente.historico_medico.all %}
+            <li>{{ historico.tipo_evento }} - {{ historico.data_evento }}: {{ historico.descricao }}</li>
+            {% empty %}
+            <p>Nenhum histórico médico registrado.</p>
+            {% endfor %}
+        </ul>
+    </li>
+    {% empty %}
+    <p>Nenhum paciente registrado.</p>
+    {% endfor %}
+</ul>
+{% endblock %}

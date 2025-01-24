@@ -1,0 +1,30 @@
+{% extends "gestao_clientes_pacientes/base.html" %}
+
+{% block title %}Detalhes do Paciente{% endblock %}
+
+{% block content %}
+<h2>{{ paciente.nome }}</h2>
+<p><strong>Espécie:</strong> {{ paciente.especie }}</p>
+<p><strong>Raça:</strong> {{ paciente.raca }}</p>
+<p><strong>Idade:</strong> {{ paciente.idade }}</p>
+<p><strong>Histórico de Saúde:</strong> {{ paciente.historico_saude }}</p>
+<p><strong>Tutor:</strong> {{ paciente.tutor.nome }}</p>
+
+<h3>Histórico Médico</h3>
+<ul>
+    {% for historico in paciente.historico_medico.all %}
+    <li>{{ historico.tipo_evento }} - {{ historico.data_evento }}: {{ historico.descricao }}</li>
+    {% empty %}
+    <p>Nenhum histórico médico registrado.</p>
+    {% endfor %}
+</ul>
+
+<h3>Vacinas</h3>
+<ul>
+    {% for vacina in paciente.vacinas.all %}
+    <li>{{ vacina.nome_vacina }} - Aplicada em: {{ vacina.data_aplicacao }}</li>
+    {% empty %}
+    <p>Nenhuma vacina registrada.</p>
+    {% endfor %}
+</ul>
+{% endblock %}

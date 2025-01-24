@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SystemVet{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <script src="{% static 'js/scripts.js' %}" defer></script>
+</head>
+<body>
+    {% include "gestao_clientes_pacientes/partials/header.html" %}
+    {% include "gestao_clientes_pacientes/partials/sidebar.html" %}
+    
+    <!-- Botão para abrir o menu lateral -->
+    <button class="menu-btn" id="menu-btn">&#9776;</button>
+
+    <!-- Conteúdo principal -->
+    <main class="main-content">
+        <section class="main-section">
+            {% block content %}
+            <!-- Conteúdo principal será injetado aqui -->
+            {% endblock %}
+        </section>
+    </main>
+
+    {% include "gestao_clientes_pacientes/partials/footer.html" %}
+
+</body>
+</html>
