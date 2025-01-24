@@ -1,11 +1,15 @@
 import mysql.connector
 from mysql.connector import Error
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Configurações do banco de dados
-host = "sql10.freesqldatabase.com"  # Substitua pelo seu host do banco
-database = "sql10759376" # Substitua pelo nome do banco de dados
-user = "sql10759376"             # Substitua pelo seu nome de usuário
-password = "TFXidvBhtc"           # Substitua pela sua senha
+host = os.getenv('DB_HOST')  # Substitua pelo seu host do banco
+database = os.getenv('DB_NAME') # Substitua pelo nome do banco de dados
+user = os.getenv('DB_USER')             # Substitua pelo seu nome de usuário
+password = os.getenv('DB_PASSWORD')           # Substitua pela sua senha
 
 print('INICIANDO O SCRIPT DE CONEXÃO AO BANCO DE DADOS...')
 
@@ -16,7 +20,7 @@ try:
         database=database,
         user=user,
         password=password,
-        use_pure=True
+        # use_pure=True
     )
     print('Conexão bem sucedida')
     if connection.is_connected():
@@ -29,16 +33,6 @@ try:
         # Criando um cursor para executar comandos SQL
         cursor = connection.cursor()
 
-        # Criando uma tabela de teste
-        create_table_query = """
-        CREATE TABLE IF NOT EXISTS teste (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            nome VARCHAR(255) NOT NULL,
-            idade INT NOT NULL
-        )
-        """
-        cursor.execute(create_table_query)
-        print("Tabela 'teste' criada com sucesso!")
 
 except Error as e:
     print(f"Erro ao conectar ao MySQL: {e}")
