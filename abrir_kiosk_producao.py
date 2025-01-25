@@ -28,5 +28,5 @@ class MainWindow(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    janela = MainWindow("systemvet-appweb.onrender.com")
+    janela = MainWindow("https://systemvet-appweb.onrender.com")
     sys.exit(app.exec_())
