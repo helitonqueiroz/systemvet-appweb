@@ -63,7 +63,7 @@ ROOT_URLCONF = "sistema_veterinario.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -91,7 +91,13 @@ DATABASES = {
         'USER': os.getenv('DB_USER'),
         'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT'),
+        'PORT': int(os.getenv('DB_PORT')),
+        'OPTIONS': {
+            'ssl': {
+                'ca': os.getenv('DB_SSL_CA', 'C:/Users/HenriQ/Documents/certsAWS/us-east-2-bundle.pem'),
+            },
+            'connect_timeout': 60,
+        }
     }
 }
 
@@ -132,7 +138,7 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
-    BASE_DIR / "sistema_veterinario" / "static",
+    BASE_DIR / "static",
 ]
 STATICFILES_FINDERS = [
     'django.contrib.staticfiles.finders.FileSystemFinder',

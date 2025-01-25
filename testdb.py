@@ -14,20 +14,17 @@ password = os.getenv('DB_PASSWORD')
 port = os.getenv('DB_PORT')
 
 try:
-    # Criando a conexão com o banco de dados com SSL
+    # Criando a conexão com o banco de dados
     connection = pymysql.connect(
         host=host,
-        db=database,
+        database=database,
         user=user,
         password=password,
         port=int(port),
-        ssl={
-            "ca": os.getenv('DB_SSL_CA', 'C:/Users/HenriQ/Documents/certsAWS/us-east-2-bundle.pem'),  # Certificado CA
-        },
     )
 
     if connection.open:
-        print("Conexão bem-sucedida ao banco de dados com SSL!")
+        print("Conexão bem-sucedida ao banco de dados!")
         
         # Opcional: Consultar informações do servidor
         with connection.cursor() as cursor:
