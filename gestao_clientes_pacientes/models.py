@@ -2,19 +2,12 @@ from django.db import models
 from django.core.validators import MinValueValidator, RegexValidator
 
 class Tutor(models.Model):
-    nome = models.CharField(max_length=100, verbose_name="Nome do Tutor")
-    endereco = models.CharField(max_length=255, verbose_name="Endereço")
-    telefone = models.CharField(
-        max_length=15,
-        validators=[RegexValidator(r'^\+?1?\d{9,15}$', 'Número de telefone inválido.')],
-        verbose_name="Telefone"
-    )
-    email = models.EmailField(verbose_name="E-mail")
-    cpf = models.CharField(
-        max_length=11,
-        validators=[RegexValidator(r'^\d{11}$', 'CPF deve conter 11 dígitos numéricos.')],
-        verbose_name="CPF"
-    )
+    nome = models.CharField(max_length=255)
+    cidade = models.CharField(max_length=255)
+    logradouro = models.CharField(max_length=255)
+    bairro = models.CharField(max_length=255)
+    cep = models.CharField(max_length=20)
+    cpf = models.CharField(max_length=20)
 
     def __str__(self):
         return self.nome

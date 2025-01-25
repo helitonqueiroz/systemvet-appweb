@@ -184,3 +184,24 @@ footer {
 .sidebar .submit-btn:hover {
     background-color: #ffb800; /* Cor vibrante ao passar o mouse */
 }
+/* Estilo para os botões */
+.styled-button {
+    background-color: #2575fc; /* Azul vibrante */
+    color: #fff;
+    font-size: 16px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px; /* Bordas arredondadas */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin: 10px;
+}
+
+.styled-button:hover {
+    background-color: #6a11cb; /* Cor ao passar o mouse */
+    transform: scale(1.05); /* Efeito de aumento suave */
+}
+
+.styled-button:focus {
+    outline: none; /* Remove o contorno padrão */
+}

@@ -1,31 +1,37 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Tutor, Paciente
+from django.core.paginator import Paginator
+from models import Paciente, Tutor
 
 def home(request):
     return render(request, 'gestao_clientes_pacientes/home.html')
 
 def lista_tutores(request):
-    tutores = Tutor.objects.all()
-    return render(request, 'gestao_clientes_pacientes/lista_tutores.html', {'tutores': tutores})
+    tutores_list = Tutor.objects.all()
+    paginator = Paginator(tutores_list, 10)  # Show 10 tutors per page
+
+    page_number = request.GET.get('page')
+    tutores = paginator.get_page(page_number)
+    
+    return render(request, 'gestao_clientes_pacientes/templates/gestao_clientes_pacientes/lista_tutores.html', {'tutores': tutores})
 
 def detalhes_tutor(request, tutor_id):
     tutor = get_object_or_404(Tutor, pk=tutor_id)
-    return render(request, 'gestao_clientes_pacientes/detalhes_tutor.html', {'tutor': tutor})
+    return render(request, 'gestao_clientes_pacientes/templates/gestao_clientes_pacientes/detalhes_tutor.html', {'tutor': tutor})
 
 def lista_pacientes(request):
     pacientes = Paciente.objects.all()
-    return render(request, 'gestao_clientes_pacientes/lista_pacientes.html', {'pacientes': pacientes})
+    return render(request, 'gestao_clientes_pacientes/templates/gestao_clientes_pacientes/lista_pacientes.html', {'pacientes': pacientes})
 
 def detalhes_paciente(request, paciente_id):
     paciente = get_object_or_404(Paciente, pk=paciente_id)
-    return render(request, 'gestao_clientes_pacientes/detalhes_paciente.html', {'paciente': paciente})
+    return render(request, 'gestao_clientes_pacientes/templates/gestao_clientes_pacientes/detalhes_paciente.html', {'paciente': paciente})
 
 def historico(request):
     pacientes = Paciente.objects.all()
-    return render(request, 'gestao_clientes_pacientes/historico.html', {'pacientes': pacientes})
+    return render(request, 'gestao_clientes_pacientes/templates/gestao_clientes_pacientes/historico.html', {'pacientes': pacientes})
 
 def configuracoes(request):
-    return render(request, 'gestao_clientes_pacientes/configuracoes.html')
+    return render(request, 'gestao_clientes_pacientes/templates/gestao_clientes_pacientes/configuracoes.html')
 
 def search(request):
     query = request.GET.get('query')

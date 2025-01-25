@@ -1,6 +1,6 @@
 import os
 # ...existing code...
-from sistema_veterinario.static import some_module
+from static import some_module
 # ...existing code...
 
 # Atualize qualquer referência à pasta 'static'

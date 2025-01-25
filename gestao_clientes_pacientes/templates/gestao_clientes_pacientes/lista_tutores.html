@@ -4,13 +4,51 @@
 
 {% block content %}
 <h2>Tutores Registrados</h2>
-<ul>
-    {% for tutor in tutores %}
-    <li>
-        <a href="{% url 'detalhes_tutor' tutor.id %}">{{ tutor.nome }}</a>
-    </li>
-    {% empty %}
-    <p>Nenhum tutor registrado.</p>
-    {% endfor %}
-</ul>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Cidade</th>
+            <th>Logradouro</th>
+            <th>Bairro</th>
+            <th>CEP</th>
+            <th>CPF</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for tutor in tutores %}
+        <tr>
+            <td>{{ tutor.nome }}</td>
+            <td>{{ tutor.cidade }}</td>
+            <td>{{ tutor.logradouro }}</td>
+            <td>{{ tutor.bairro }}</td>
+            <td>{{ tutor.cep }}</td>
+            <td>{{ tutor.cpf }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">Nenhum tutor registrado.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if tutores.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ tutores.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ tutores.number }} of {{ tutores.paginator.num_pages }}.
+        </span>
+
+        {% if tutores.has_next %}
+            <a href="?page={{ tutores.next_page_number }}">next</a>
+            <a href="?page={{ tutores.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
 {% endblock %}
+
