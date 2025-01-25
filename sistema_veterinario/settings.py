@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import pymysql
 
 # Carregar as variáveis de ambiente do arquivo .env
 load_dotenv()
@@ -80,6 +81,8 @@ WSGI_APPLICATION = "sistema_veterinario.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+
+pymysql.install_as_MySQLdb()
 
 DATABASES = {
     'default': {
