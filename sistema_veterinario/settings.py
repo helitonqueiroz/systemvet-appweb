@@ -17,6 +17,10 @@ import pymysql
 
 # Carregar as variáveis de ambiente do arquivo .env
 load_dotenv()
+
+if not os.getenv("DB_NAME") or not os.getenv("DB_USER"):
+    raise ValueError("As variáveis de ambiente do banco de dados não estão configuradas.")
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,10 +29,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-lfp==a9o!_(t#^rguj^96^l3kg+l%u_q5x+(usk4pi4&4zju(e"
+SECRET_KEY = os.getenv('SECRET_KEY', 'default-secret-key')
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG ='True'
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'systemvet-appweb.onrender.com']
 
@@ -47,6 +52,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -54,6 +60,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
 
 # Garante que arquivos estáticos serão servidos em produção
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
@@ -94,7 +101,7 @@ DATABASES = {
         'PORT': int(os.getenv('DB_PORT')),
         'OPTIONS': {
             'ssl': {
-                'ca': os.getenv('DB_SSL_CA', 'C:/Users/HenriQ/Documents/certsAWS/us-east-2-bundle.pem'),
+                'ca': os.getenv('DB_SSL_CA'),
             },
             'connect_timeout': 60,
         }
@@ -136,9 +143,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),  # Pasta onde o `styles.css` e o `logo.jpg` estão
+]
 
 # Configuração para coleta de arquivos estáticos
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
